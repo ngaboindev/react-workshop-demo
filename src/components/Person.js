@@ -1,55 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { GradeButton } from "./GradeButton";
 
-export class Person extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      person: {
-        name: "Laetitia",
-        status: "single",
-        grade: 0,
-      },
-    };
+export const Person = () => {
+  const [person, setPerson] = useState({
+    name: "Laetitia",
+    status: "single",
+    grade: 0,
+  });
+  const [schools, setSchools] = useState([]);
 
-    // this.updateGrade.bind(this);
-  }
-
-  // Lifecycle
-  componentDidMount() {
+  useEffect(() => {
     console.log("mounted");
-  }
-  componentDidUpdate() {
-    console.log("grade", this.state.person.grade);
-  }
+  }, []);
 
-  updateGrade = (action = "increase") => {
-    this.setState(({ person }) => ({
-      person: {
-        ...person,
-        grade: action == "increase" ? person.grade + 1 : person.grade - 1,
-      },
-    }));
+  useEffect(() => {
+    console.log("grade", person.grade);
+    console.log("school", schools);
+  }, [person, schools]);
+
+  /**
+   * Assess the action needed (can be increase or decrease)
+   * @param {Boolean} isIncrease
+   */
+  const updateGrade = (isIncrease = true) => {
+    setPerson({
+      ...person,
+      grade: isIncrease ? person.grade + 1 : person.grade - 1,
+    });
   };
 
-  // render
-  render() {
-    const { person } = this.state;
-
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <div>Name: {person.name}</div>
-          <div>Status: {person.status}</div>
-          <div>Grade: {person.grade}</div>
-        </div>
-
-        <div>
-          <button onClick={() => this.updateGrade()}>Increase grade</button>
-          <button onClick={() => this.updateGrade("decrease")}>
-            Decrease grade
-          </button>
-        </div>
+        <div>Name: {person.name}</div>
+        <div>Status: {person.status}</div>
+        <div>Grade: {person.grade}</div>
       </div>
-    );
-  }
-}
+
+      <div>
+        <GradeButton updateGrade={() => updateGrade()} grade={person.grade}>
+          Increase grade
+        </GradeButton>
+        <GradeButton
+          updateGrade={() => updateGrade(false)}
+          grade={person.grade}
+        >
+          Decrease grade
+        </GradeButton>
+        {/* <GradeButton
+          updateGrade={() =>
+            setSchools([...schools, `School ${schools.length + 1}`])
+          }
+        >
+          Add school
+        </GradeButton> */}
+      </div>
+    </div>
+  );
+};
