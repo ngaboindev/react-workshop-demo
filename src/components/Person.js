@@ -1,4 +1,5 @@
 import React from "react";
+import { GradeButton } from "./GradeButton";
 
 export class Person extends React.Component {
   constructor() {
@@ -10,8 +11,6 @@ export class Person extends React.Component {
         grade: 0,
       },
     };
-
-    // this.updateGrade.bind(this);
   }
 
   // Lifecycle
@@ -44,10 +43,18 @@ export class Person extends React.Component {
         </div>
 
         <div>
-          <button onClick={() => this.updateGrade()}>Increase grade</button>
-          <button onClick={() => this.updateGrade("decrease")}>
+          <GradeButton
+            grade={this.state.person.grade}
+            updateGrade={() => this.updateGrade()}
+          >
+            Increase grade
+          </GradeButton>
+          <GradeButton
+            grade={this.state.person.grade}
+            updateGrade={() => this.updateGrade("decrease")}
+          >
             Decrease grade
-          </button>
+          </GradeButton>
         </div>
       </div>
     );
