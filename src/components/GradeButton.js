@@ -1,23 +1,29 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export class GradeButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { children, grade, updateGrade } = this.props;
-
-    // return <button onClick={() => this.updateGrade()}>Increase grade</button>;
-    return (
-      <button
-        onClick={updateGrade}
-        className={`button ${additionalClasses ?? ""}`}
-      >
-        {children} ({grade})
-      </button>
-    );
-  }
-}
+export const GradeButton = ({
+  children,
+  grade,
+  updateGrade,
+  additionalClasses,
+}) => {
+  return (
+    <button
+      onClick={updateGrade}
+      className={`button ${additionalClasses ?? ""}`}
+    >
+      {children} ({grade})
+    </button>
+  );
+};
 
 // TODO: add react prop types
+GradeButton.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  grade: PropTypes.number.isRequired,
+  updateGrade: PropTypes.func.isRequired,
+  additionalClasses: PropTypes.string,
+};
