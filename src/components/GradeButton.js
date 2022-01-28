@@ -6,11 +6,14 @@ export class GradeButton extends React.Component {
   }
 
   render() {
-    let { children, grade, updateGrade } = this.props;
+    const { children, grade, updateGrade } = this.props;
 
     // return <button onClick={() => this.updateGrade()}>Increase grade</button>;
     return (
-      <button onClick={updateGrade}>
+      <button
+        onClick={updateGrade}
+        className={`button ${additionalClasses ?? ""}`}
+      >
         {children} ({grade})
       </button>
     );
