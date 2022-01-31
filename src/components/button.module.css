@@ -1,0 +1,21 @@
+.btn {
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 0.2s;
+  border-radius: 0.25rem;
+  font-family: inherit;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  display: inline-flex;
+  border: 1px solid transparent;
+  cursor: pointer;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  background-color: rgb(36, 180, 127);
+  padding: 5px 10px;
+}
+
+.danger {
+  background-color: rgb(250, 75, 75);
+}
